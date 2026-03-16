@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 // Bianca Ysobelle M. Secreto - name 
-// lrbysecreto - GitHub username 
+// lrbysecreto - GitHub username
 package com.mycompany.motorph;
 
 /**
