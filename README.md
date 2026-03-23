@@ -3,10 +3,10 @@
 ## H1101 | MotorPH Payroll System 
 
 ## Team Details: 
-### - Catherine Alcantara
-### - Bianca Secreto 
-### - Benedict Pahati
-### - Mary Mesinas
+ - Catherine Alcantara
+ - Bianca Secreto 
+ - Benedict Pahati
+- Mary Mesinas
 
 ## Contribution of Members:
 
