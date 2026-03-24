@@ -4,184 +4,404 @@
  */
 package com.mycompany.motorph;
 
-/**
- *
- * @author pahati
- */
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.*;
 
 public class MotorPH {
 
+    static Scanner sc = new Scanner(System.in);
+    static String BASE_DIR = "c:\\Users\\ASUS\\Desktop\\motorph";
+
     public static void main(String[] args) {
 
-        // File Location
-        String filePath = "src/main/java/com/mycompany/MotorPH/employee_data.txt";
+        System.out.print("Enter Username: ");
+        String username = sc.nextLine();
 
-        File file = new File(filePath);
+        System.out.print("Enter Password: ");
+        String password = sc.nextLine();
 
-        // Validate FIle
-        if (!file.exists() || !file.canRead()) {
-            System.out.println("Error: File not found or cannot be read.");
+        if (!(username.equals("employee") || username.equals("payroll_staff")) || !password.equals("12345")) {
+            System.out.println("Incorrect username and/or password.");
             return;
         }
 
-        // Reader Close
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-
-            String line;
-
-            // Read each line from the text file
-            while ((line = reader.readLine()) != null) {
-
-                // Split the record into name and salary
-                String[] data = line.split(",");
-
-                // Validate correct format
-                if (data.length != 2) {
-                    System.out.println("Invalid record format: " + line);
-                    continue;
-                }
-
-                String employeeName = data[0].trim();
-                double grossSalary;
-
-                // Convert salary text to number
-                try {
-                    grossSalary = Double.parseDouble(data[1].trim());
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid salary value for: " + employeeName);
-                    continue;
-                }
-
-                // Ensure salary is positive
-                if (grossSalary <= 0) {
-                    System.out.println("Salary must be positive for: " + employeeName);
-                    continue;
-                }
-
-                // Compute government deductions
-                double sss = computeSSS(grossSalary);
-                double philhealth = computePhilHealth(grossSalary);
-                double pagibig = computePagIbig(grossSalary);
-
-                double totalDeductions = sss + philhealth + pagibig;
-
-                // Compute taxable income
-                double taxableIncome = grossSalary - totalDeductions;
-
-                // Compute withholding tax
-                double incomeTax = computeIncomeTax(taxableIncome);
-
-                // Compute net pay
-                double netPay = grossSalary - (totalDeductions + incomeTax);
-
-                // Display payroll summary
-                System.out.println("\n==============================");
-                System.out.println("Employee Name: " + employeeName);
-                System.out.println("Gross Salary: PHP " + grossSalary);
-                System.out.println("SSS: PHP " + sss);
-                System.out.println("PhilHealth: PHP " + philhealth);
-                System.out.println("Pag-IBIG: PHP " + pagibig);
-                System.out.println("Income Tax: PHP " + incomeTax);
-                System.out.println("Net Pay: PHP " + netPay);
-                System.out.println("==============================");
-            }
-
-        } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
+        if (username.equals("employee")) {
+            employeeMenu();
+        } else {
+            payrollStaffMenu();
         }
     }
 
-    // SSS Deduction
-    public static double computeSSS(double salary) {
+    // ================= EMPLOYEE MENU =================
+    static void employeeMenu() {
+        while (true) {
+            System.out.println("\n======= EMPLOYEE MENU =======");
+            System.out.println("1. Enter your employee number");
+            System.out.println("2. Exit the program");
+            System.out.print("Enter Number: ");
+            String choice = sc.nextLine();
 
-        if (salary < 3250) return 135;
-        else if (salary <= 3750) return 157.5;
-        else if (salary <= 4250) return 180;
-        else if (salary <= 4750) return 202.5;
-        else if (salary <= 5250) return 225;
-        else if (salary <= 5750) return 247.5;
-        else if (salary <= 6250) return 270;
-        else if (salary <= 6750) return 292.5;
-        else if (salary <= 7250) return 315;
-        else if (salary <= 7750) return 337.5;
-        else if (salary <= 8250) return 360;
-        else if (salary <= 8750) return 382.5;
-        else if (salary <= 9250) return 405;
-        else if (salary <= 9750) return 427.5;
-        else if (salary <= 10250) return 450;
-        else if (salary <= 10750) return 472.5;
-        else if (salary <= 11250) return 495;
-        else if (salary <= 11750) return 517.5;
-        else if (salary <= 12250) return 540;
-        else if (salary <= 12750) return 562.5;
-        else if (salary <= 13250) return 585;
-        else if (salary <= 13750) return 607.5;
-        else if (salary <= 14250) return 630;
-        else if (salary <= 14750) return 652.5;
-        else if (salary <= 15250) return 675;
-        else if (salary <= 15750) return 697.5;
-        else if (salary <= 16250) return 720;
-        else if (salary <= 16750) return 742.5;
-        else if (salary <= 17250) return 765;
-        else if (salary <= 17750) return 787.5;
-        else if (salary <= 18250) return 810;
-        else if (salary <= 18750) return 832.5;
-        else if (salary <= 19250) return 855;
-        else if (salary <= 19750) return 877.5;
-        else if (salary <= 20250) return 900;
-        else if (salary <= 20750) return 922.5;
-        else if (salary <= 21250) return 945;
-        else if (salary <= 21750) return 967.5;
-        else if (salary <= 22250) return 990;
-        else if (salary <= 22750) return 1012.5;
-        else if (salary <= 23250) return 1035;
-        else if (salary <= 23750) return 1057.5;
-        else if (salary <= 24250) return 1080;
-        else if (salary <= 24750) return 1102.5;
-        else return 1125;
+            if (choice.equals("1")) {
+                System.out.print("Enter Employee Number: ");
+                String empNo = sc.nextLine();
+                displayBasicInfo(empNo);
+            } else if (choice.equals("2")) {
+                System.out.println("Exiting program.");
+                return;
+            } else {
+                System.out.println("Invalid choice.");
+            }
+        }
     }
 
-    // Philhealth Deduction
-    public static double computePhilHealth(double salary) {
+    // ================= PAYROLL STAFF MENU =================
+    static void payrollStaffMenu() {
+        while (true) {
+            System.out.println("\n======= PAYROLL STAFF MENU =======");
+            System.out.println("1. Process Payroll");
+            System.out.println("2. Exit the program");
+            System.out.print("Enter Number: ");
+            String choice = sc.nextLine();
+
+            if (choice.equals("1")) {
+                processPayrollMenu();
+            } else if (choice.equals("2")) {
+                System.out.println("Exiting program.");
+                return;
+            } else {
+                System.out.println("Invalid choice.");
+            }
+        }
+    }
+
+    // ================= PROCESS PAYROLL SUBMENU =================
+    static void processPayrollMenu() {
+        while (true) {
+            System.out.println("\n======= PROCESS PAYROLL =======");
+            System.out.println("1. One employee");
+            System.out.println("2. All employees");
+            System.out.println("3. Exit the program");
+            System.out.print("Enter Number: ");
+            String choice = sc.nextLine();
+
+            if (choice.equals("1")) {
+                System.out.print("Enter the employee number: ");
+                String empNo = sc.nextLine();
+                if (!displayPayrollForEmployee(empNo)) {
+                    System.out.println("• Employee number does not exist.");
+                }
+            } else if (choice.equals("2")) {
+                processAllEmployees();
+            } else if (choice.equals("3")) {
+                System.out.println("Exiting program.");
+                return;
+            } else {
+                System.out.println("Invalid choice.");
+            }
+        }
+    }
+
+    // ================= CSV PARSER =================
+    static String[] parseCSV(String line) {
+        List<String> result = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+        boolean inQuotes = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+
+            if (c == '"') {
+                inQuotes = !inQuotes;
+            } else if (c == ',' && !inQuotes) {
+                result.add(current.toString().trim().replaceAll("^\"|\"$", ""));
+                current = new StringBuilder();
+            } else {
+                current.append(c);
+            }
+        }
+        result.add(current.toString().trim().replaceAll("^\"|\"$", ""));
+
+        return result.toArray(new String[0]);
+    }
+
+    // ================= EMPLOYEE INFO =================
+    static void displayBasicInfo(String empNo) {
+
+        try (BufferedReader br = new BufferedReader(new FileReader(BASE_DIR + "\\employeedata.csv"))) {
+
+            String line;
+            br.readLine(); 
+
+            while ((line = br.readLine()) != null) {
+
+                String[] data = parseCSV(line);
+
+                if (data[0].equals(empNo)) {
+                    System.out.println("Employee Number: " + data[0]);
+                    System.out.println("Employee Name: " + data[2] + " " + data[1]);
+                    System.out.println("Birthday: " + data[3]);
+                    return;
+                }
+            }
+
+            System.out.println("Employee number does not exist.");
+
+        } catch (Exception e) {
+            System.out.println("Error reading employee file.");
+        }
+    }
+
+    // ================= PROCESS ALL EMPLOYEES =================
+    static void processAllEmployees() {
+
+        try (BufferedReader br = new BufferedReader(new FileReader(BASE_DIR + "\\employeedata.csv"))) {
+
+            String line;
+            br.readLine(); // skip header
+
+            while ((line = br.readLine()) != null) {
+
+                String[] data = parseCSV(line);
+
+                String empNo = data[0];
+                String rateStr = data[18].replaceAll(",", ""); 
+                double rate = Double.parseDouble(rateStr);
+
+                // Process all months from June (6) to December (12)
+                for (int month = 6; month <= 12; month++) {
+                    double h1 = computeHours(empNo, month, "1-15");
+                    double h2 = computeHours(empNo, month, "16-31");
+                    displayPayroll(data, rate, h1, h2, month);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error processing employees.");
+        }
+    }
+
+    // ================= DISPLAY PAYROLL FOR SINGLE EMPLOYEE =================
+    static boolean displayPayrollForEmployee(String empNo) {
+
+        try (BufferedReader br = new BufferedReader(new FileReader(BASE_DIR + "\\employeedata.csv"))) {
+
+            String line;
+            br.readLine(); // skip header
+
+            while ((line = br.readLine()) != null) {
+
+                String[] data = parseCSV(line);
+
+                if (data[0].equals(empNo)) {
+                    String rateStr = data[18].replaceAll(",", "");
+                    double rate = Double.parseDouble(rateStr);
+
+                    // Process all months from June (6) to December (12)
+                    for (int month = 6; month <= 12; month++) {
+                        double h1 = computeHours(empNo, month, "1-15");
+                        double h2 = computeHours(empNo, month, "16-31");
+                        displayPayroll(data, rate, h1, h2, month);
+                    }
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error processing employee.");
+        }
+
+        return false;
+    }
+
+    // ================= COMPUTE HOURS =================
+    static double computeHours(String empNo, int month, String cutoff) {
+
+        double totalHours = 0;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(BASE_DIR + "\\employeeattendance.csv"))) {
+
+            String line;
+            br.readLine(); // skip header
+
+            while ((line = br.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                if (!data[0].equals(empNo)) continue;
+
+                // Parse date: M/D/YYYY
+                String[] dateParts = data[3].split("/");
+                int empMonth = Integer.parseInt(dateParts[0]);
+                int day = Integer.parseInt(dateParts[1]);
+
+                // Skip if not the target month
+                if (empMonth != month) continue;
+
+                if (cutoff.equals("1-15") && day > 15) continue;
+                if (cutoff.equals("16-31") && day <= 15) continue;
+
+                double timeIn = convertTime(data[4]);
+                double timeOut = convertTime(data[5]);
+
+                double start = Math.max(timeIn, 8.0);
+                double end = Math.min(timeOut, 17.0);
+
+                double hours = end - start;
+
+                if (hours > 8) hours = 8;
+                if (hours < 0) hours = 0;
+
+                totalHours += hours;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error reading attendance.");
+        }
+
+        return totalHours;
+    }
+
+    // ================= TIME CONVERTER =================
+    static double convertTime(String time) {
+
+        String[] t = time.split(":");
+        double hour = Double.parseDouble(t[0]);
+        double min = Double.parseDouble(t[1]) / 60;
+
+        return hour + min;
+    }
+
+    // ================= GET MONTH NAME =================
+    static String getMonthName(int month) {
+        String[] months = {"", "January", "February", "March", "April", "May", "June", 
+                           "July", "August", "September", "October", "November", "December"};
+        return months[month];
+    }
+
+    // ================= DISPLAY PAYROLL =================
+    static void displayPayroll(String[] data, double rate, double h1, double h2, int month) {
+
+        double gross1 = h1 * rate;
+        double gross2 = h2 * rate;
+
+        // Deductions are calculated based on combined gross (for the month)
+        double combinedGross = gross1 + gross2;
+        double sss = computeSSS(combinedGross);
+        double phil = computePhilHealth(combinedGross);
+        double pagibig = computePagIbig(combinedGross);
+
+        double totalDed = sss + phil + pagibig;
+        double taxable = combinedGross - totalDed;
+        double tax = computeTax(taxable);
+
+        double net1 = gross1;
+        double net2 = gross2 - (totalDed + tax);
+
+        System.out.println("\n==============================");
+        System.out.println("Employee #: " + data[0]);
+        System.out.println("• Employee Name: " + data[2] + " " + data[1]);
+        System.out.println("• Birthday: " + data[3]);
+
+        System.out.println("• Cutoff Date: " + getMonthName(month) + " 1 to " + getMonthName(month) + " 15");
+        System.out.println("Total Hours Worked: " + h1);
+        System.out.println("Gross Salary: " + gross1);
+        System.out.println("Net Salary: " + net1);
+
+        System.out.println("• Cutoff Date: " + getMonthName(month) + " 16 to " + getMonthName(month) + " 31 ");
+        System.out.println("Total Hours Worked: " + h2);
+        System.out.println("Gross Salary: " + gross2);
+        System.out.println("Each Deduction:");
+        System.out.println("SSS: " + sss);
+        System.out.println("PhilHealth: " + phil);
+        System.out.println("Pag-IBIG: " + pagibig);
+        System.out.println("Tax: " + tax);
+        System.out.println("Total Deductions: " + (totalDed + tax));
+        System.out.println("Net Salary: " + net2);
+    }
+
+    // ================= SSS =================
+    static double computeSSS(double salary) {
+
+        if (salary < 3250) return 135.00;
+        else if (salary <= 3750) return 157.50;
+        else if (salary <= 4250) return 180.00;
+        else if (salary <= 4750) return 202.50;
+        else if (salary <= 5250) return 225.00;
+        else if (salary <= 5750) return 247.50;
+        else if (salary <= 6250) return 270.00;
+        else if (salary <= 6750) return 292.50;
+        else if (salary <= 7250) return 315.00;
+        else if (salary <= 7750) return 337.50;
+        else if (salary <= 8250) return 360.00;
+        else if (salary <= 8750) return 382.50;
+        else if (salary <= 9250) return 405.00;
+        else if (salary <= 9750) return 427.50;
+        else if (salary <= 10250) return 450.00;
+        else if (salary <= 10750) return 472.50;
+        else if (salary <= 11250) return 495.00;
+        else if (salary <= 11750) return 517.50;
+        else if (salary <= 12250) return 540.00;
+        else if (salary <= 12750) return 562.50;
+        else if (salary <= 13250) return 585.00;
+        else if (salary <= 13750) return 607.50;
+        else if (salary <= 14250) return 630.00;
+        else if (salary <= 14750) return 652.50;
+        else if (salary <= 15250) return 675.00;
+        else if (salary <= 15750) return 697.50;
+        else if (salary <= 16250) return 720.00;
+        else if (salary <= 16750) return 742.50;
+        else if (salary <= 17250) return 765.00;
+        else if (salary <= 17750) return 787.50;
+        else if (salary <= 18250) return 810.00;
+        else if (salary <= 18750) return 832.50;
+        else if (salary <= 19250) return 855.00;
+        else if (salary <= 19750) return 877.50;
+        else if (salary <= 20250) return 900.00;
+        else if (salary <= 20750) return 922.50;
+        else if (salary <= 21250) return 945.00;
+        else if (salary <= 21750) return 967.50;
+        else if (salary <= 22250) return 990.00;
+        else if (salary <= 22750) return 1012.50;
+        else if (salary <= 23250) return 1035.00;
+        else if (salary <= 23750) return 1057.50;
+        else if (salary <= 24250) return 1080.00;
+        else if (salary <= 24750) return 1102.50;
+        else return 1125.00;
+    }
+
+    // ================= PHILHEALTH =================
+    static double computePhilHealth(double salary) {
 
         double premium;
 
-        if (salary <= 10000)
-            premium = 300;
-        else if (salary < 60000)
-            premium = salary * 0.03;
-        else
-            premium = 1800;
+        if (salary <= 10000) premium = 300;
+        else if (salary < 60000) premium = salary * 0.03;
+        else premium = 1800;
 
         return premium / 2;
     }
 
-    // PagIbig Deduction
-    public static double computePagIbig(double salary) {
+    // ================= PAG-IBIG =================
+    static double computePagIbig(double salary) {
 
         double contribution;
 
-        if (salary <= 1500)
+        if (salary >= 1000 && salary <= 1500)
             contribution = salary * 0.01;
-        else
+        else if (salary > 1500)
             contribution = salary * 0.02;
+        else
+            contribution = 0;
 
-        if (contribution > 100)
-            contribution = 100;
+        if (contribution > 100) contribution = 100;
 
         return contribution;
     }
 
-    // Income Tax Deduction
-    public static double computeIncomeTax(double taxableIncome) {
+    // ================= INCOME TAX =================
+    static double computeTax(double taxableIncome) {
 
-        if (taxableIncome <= 20832)
-            return 0;
+        if (taxableIncome <= 20832) return 0;
         else if (taxableIncome < 33333)
             return (taxableIncome - 20833) * 0.20;
         else if (taxableIncome < 66667)
