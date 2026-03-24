@@ -133,7 +133,7 @@ public class MotorPH {
     // ================= EMPLOYEE INFO =================
     static void displayBasicInfo(String empNo) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(BASE_DIR + "\\employeedata.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("employeedata.csv"))) {
 
             String line;
             br.readLine(); 
@@ -160,7 +160,7 @@ public class MotorPH {
     // ================= PROCESS ALL EMPLOYEES =================
     static void processAllEmployees() {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(BASE_DIR + "\\employeedata.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("employeedata.csv"))) {
 
             String line;
             br.readLine(); // skip header
@@ -189,7 +189,7 @@ public class MotorPH {
     // ================= DISPLAY PAYROLL FOR SINGLE EMPLOYEE =================
     static boolean displayPayrollForEmployee(String empNo) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(BASE_DIR + "\\employeedata.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("employeedata.csv"))) {
 
             String line;
             br.readLine(); // skip header
@@ -224,7 +224,7 @@ public class MotorPH {
 
         double totalHours = 0;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(BASE_DIR + "\\employeeattendance.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("employeeattendance.csv"))) {
 
             String line;
             br.readLine(); // skip header
