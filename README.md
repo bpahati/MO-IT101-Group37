@@ -9,4 +9,5 @@
 - Mary Mesinas
 
 ## Contribution of Members:
-
+|---|---|
+|Analyze the MotorPH project requirements and the company background| Bianca Secreto Catherine Alcantara Benedict Pahati Mary Mesinas |
