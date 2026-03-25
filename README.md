@@ -34,6 +34,7 @@
 
 ## Program Details 
 The MotorPH Payroll Program is a Java-based program that calculates an employee’s total hours worked and salary. The system uses variables to store employee information such as name, hours worked, and hourly rate. It then applies arithmetic operations to compute the total pay after processing the data 
+#### [CodeExplanation.md](https://github.com/bpahati/MO-IT101-Group37/blob/master/CodeExplanation.md)
 
 ## Project Planning Link 
 #### [MotorPH Project Plan Link](https://docs.google.com/spreadsheets/d/1GirLl47svgwAwDP1u0EcxJTGWcfkuzMBKvbIKzk8RRc/edit?usp=sharing)
