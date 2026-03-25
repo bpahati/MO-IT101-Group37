@@ -1,13 +1,32 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * MotorPH Payroll System
+ *
+ * Usage Instructions:
+ * 1. Run the program.
+ * 2. Enter Username:
+ *      - "employee" OR "payroll_staff"
+ * 3. Enter Password:
+ *      - "12345"
+ * 4. If you log in as Employee:
+ *      - You will see the Employee Menu:
+ *          1. Enter your employee number
+ *          2. Exit the program
+ *      - Example:
+ *          Enter Number: 1
+ *          Enter Employee Number: 10016
+ *          Employee Number: 10016
+ *          Employee Name: Christian Mata
+ *          Birthday: 10/21/1987
+ * 5. Follow the prompts to view employee info or exit the menu.
+ *
+ * Note:
+ * - Employee and attendance data are read from CSV files
+ * - Employee number is required to display payroll or personal info
  */
-//Bianca Ysobelle M. Secreto - name
-//lrbysecreto - GitHub username 
-//March 17, 2026
-//Mary Jesiery Mesinaas - name
-//rmjmesinas-blip - GitHub username
-//March 18, 2026                               
+
+
 package com.mycompany.motorph;
 
 import java.io.*;
