@@ -27,7 +27,7 @@
 | Added other members and mentors as collaborators in GitHub | Benedict Pahati |
 |Tested and checked the payroll program | Bianca Secreto Catherine Alcantara Mary Mesinas 
 | Fixed the errors in payroll system |Benedict Pahati|
-| Commit, edited and updated the README.file | Bianca Secreto |
+| Commit, edited and updated the README.file | Bianca Secreto | Catherine Alcantara
 | Revise and finalize the payroll system | Benedict Pahati |
 | Review and finalize all the requirements, information, and payroll system | Bianca Secreto Benedict Pahati Catherine Alcantara Mary Mesinas |
 | Submitted the final project of MotorPH Payroll System | Bianca Secreto Catherine Alcantara Benedict Pahati Mary Mesinas |
