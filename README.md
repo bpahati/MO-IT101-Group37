@@ -33,7 +33,8 @@
 | Submitted the final project of MotorPH Payroll System | Bianca Secreto Catherine Alcantara Benedict Pahati Mary Mesinas |
 
 ## Program Details 
-The MotorPH Payroll Program is a Java-based program that calculates an employee’s total hours worked and salary. The system uses variables to store employee information such as name, hours worked, and hourly rate. It then applies arithmetic operations to compute the total pay after processing the data 
+The MotorPH Payroll Program is a java-based system that calculates employees working hours and salary using data from a CSV file. It supports two types of users: employees and payroll staff. The system processes attendance records to compute total hours worked per cutoff period and calculates gross salary based on hourly rates. It also applies government-mandated  deductions such as SSS, Philhealth, Pag-Ibig, and income tax to determine the net salary. the program can generate payroll for a single employee or all employees.
+
 #### [CodeExplanation.md](https://github.com/bpahati/MO-IT101-Group37/blob/master/CodeExplanation.md)
 
 ## Project Planning Link 
