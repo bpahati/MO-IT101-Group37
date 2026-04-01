@@ -7,7 +7,10 @@
 //March 17, 2026
 //Mary Jesiery Mesinaas - name
 //rmjmesinas-blip - GitHub username
-//March 18, 2026                               
+//March 18, 2026   
+//Catherine Alcantara - name
+//lrcalcantara-alt - Github username
+//April 1, 2026
 package com.mycompany.motorph;
 
 import java.io.*;
